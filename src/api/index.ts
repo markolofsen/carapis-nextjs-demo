@@ -9,8 +9,11 @@ import { API } from '@carapis/api';
 
 export type VehicleListQuery = Encar_publicTypes.DataEncarApiVehiclesWebListData['query'];
 
+// SSR proxy url - use direct API URL for SSR, /apix proxy for client
+const apiUrl = typeof window === 'undefined' ? settings.apiUrl : '/';
+
 // Initialize API client with base URL only
-const api = new API(settings.apiUrl);
+const api = new API(apiUrl);
 const headers = {
   'X-API-Key': settings.apiKey,
   'Content-Type': 'application/json',

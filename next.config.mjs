@@ -27,6 +27,16 @@ const nextConfig = {
     return config;
   },
 
+  // Proxy API requests to backend
+  async rewrites() {
+    return [
+      {
+        source: '/apix/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/apix/:path*/`,
+      },
+    ];
+  },
+
   // Headers for CORS and security
   async headers() {
     return [
