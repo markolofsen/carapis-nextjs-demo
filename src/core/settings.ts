@@ -16,6 +16,6 @@ export const settings = {
 
   url: process.env.NEXT_PUBLIC_URL as string,
   apiUrl: process.env.NEXT_PUBLIC_API_URL as string,
-  apiKey: process.env.NEXT_PUBLIC_API_KEY as string,
-  googleTagId: 'G-625RR7KQZX',
+  apiKey: process.env.NEXT_PUBLIC_CARAPIS_APIKEY as string,
+  googleTagId: process.env.NEXT_PUBLIC_GOOGLE_TAG_ID as string,
 };

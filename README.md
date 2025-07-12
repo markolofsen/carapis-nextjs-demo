@@ -38,31 +38,83 @@ The portal is pre-configured with the following environment variables:
 ```env
 NEXT_PUBLIC_URL=https://vamcar.com
 NEXT_PUBLIC_API_URL=https://api2.carapis.com
-NEXT_PUBLIC_CARAPIS_APIKEY=your-api-key
+
+# CARAPIS
+NEXT_PUBLIC_CARAPIS_APIKEY=
+NEXT_PUBLIC_GOOGLE_TAG_ID=
 ```
+
+- `NEXT_PUBLIC_CARAPIS_APIKEY` — your CarAPIS API key (get it from your CarAPIS dashboard)
+- `NEXT_PUBLIC_GOOGLE_TAG_ID` — your Google Tag Manager ID (optional, for analytics)
 
 ## Docker Deployment
 
 For production deployment, use the provided Docker configuration:
+
+### Using Dockerfile
+
+```bash
+# Build the Docker image
+docker build -t car-portal .
+
+# Run the container
+docker run -p 3000:3000 car-portal
+```
+
+### Using Docker Compose
 
 ```bash
 # Build and run with Docker Compose
 docker-compose up -d encar_portal
 ```
 
-The portal will be available at port 9102.
+The portal will be available at port 3000 (or 9102 when using docker-compose).
+
+### Environment Variables in Docker
+
+You can pass environment variables when running the container:
+
+```bash
+docker run -p 3000:3000 \
+  -e NEXT_PUBLIC_CARAPIS_APIKEY=your-api-key \
+  -e NEXT_PUBLIC_GOOGLE_TAG_ID=your-gtag-id \
+  car-portal
+```
 
 ## Project Structure
 
 ```
 portal/
 ├── src/
-│   ├── app/              # Next.js app router
-│   ├── components/       # UI components
-│   ├── lib/             # Utilities and API client
-│   └── types/           # TypeScript definitions
-├── package.json
-└── README.md
+│   ├── api/                 # API clients and types
+│   │   ├── encar_public/    # ENCAR API client
+│   │   └── index.ts         # API exports
+│   ├── components/          # UI components
+│   ├── core/                # Core configuration
+│   │   ├── routes.ts        # Route definitions
+│   │   └── settings.ts      # App settings
+│   ├── layouts/             # Page layouts
+│   │   ├── 404/             # 404 page layout
+│   │   ├── Error/           # Error page layout
+│   │   └── Public/          # Public pages layout
+│   ├── pages/               # Next.js pages
+│   │   ├── api/             # API routes
+│   │   ├── catalog/         # Car catalog pages
+│   │   ├── v/               # Vehicle detail pages
+│   │   └── index.tsx        # Home page
+│   └── views/               # Page views and components
+│       ├── catalog/         # Catalog view components
+│       └── detail/          # Vehicle detail view
+├── public/                  # Static assets
+│   ├── static/              # Static files
+│   │   ├── favicons/        # Favicon files
+│   │   ├── fonts/           # Font files
+│   │   └── lottie/          # Lottie animation files
+│   └── manifest.json        # PWA manifest
+├── package.json             # Dependencies and scripts
+├── tsconfig.json            # TypeScript configuration
+├── next.config.mjs          # Next.js configuration
+└── README.md                # This file
 ```
 
 ## API Integration
@@ -81,12 +133,6 @@ This portal integrates with the CarAPIS platform for:
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
-
-### Adding Features
-
-1. Create new components in `src/components/`
-2. Add API calls in `src/lib/api/`
-3. Update types in `src/types/`
 
 ## License
 
