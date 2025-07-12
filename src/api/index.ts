@@ -4,35 +4,30 @@
  */
 
 import { settings } from '@/core/settings';
-import { dataEncarApiVehiclesWebList, dataEncarApiVehiclesWebRetrieve } from './encar_public';
-import { createClient } from './encar_public/client';
+import type { Encar_publicTypes } from '@carapis/api';
+import { API } from '@carapis/api';
 
-// Initialize the client with API Key
-const myClient = createClient({
-  baseUrl: settings.apiUrl,
-  headers: {
-    'X-API-Key': settings.apiKey,
-    'Content-Type': 'application/json',
-  },
-});
+export type VehicleListQuery = Encar_publicTypes.DataEncarApiVehiclesWebListData['query'];
 
-// Fetch vehicle listings wrapper
-const dataEncarApiVehiclesList = async (query: any) => {
-  const response = await dataEncarApiVehiclesWebList({
-    client: myClient,
+// Initialize API client with base URL only
+const api = new API(settings.apiUrl);
+const headers = {
+  'X-API-Key': settings.apiKey,
+  'Content-Type': 'application/json',
+};
+
+// Wrapper for vehicle list
+export const dataEncarApiVehiclesList = (query: VehicleListQuery) =>
+  api.encar_public?.dataEncarApiVehiclesWebList({
     query,
+    headers,
   });
-  return response;
-};
 
-// Fetch single vehicle wrapper
-const dataEncarApiVehiclesRetrieve = async (path: { listing_id: string }) => {
-  const response = await dataEncarApiVehiclesWebRetrieve({
-    client: myClient,
-    path,
+// Wrapper for vehicle detail
+export const dataEncarApiVehiclesRetrieve = (listing_id: string) =>
+  api.encar_public?.dataEncarApiVehiclesWebRetrieve({
+    path: { listing_id },
+    headers,
   });
-  return response;
-};
 
-export { dataEncarApiVehiclesList, dataEncarApiVehiclesRetrieve, myClient };
-export default myClient;
+export default api;

@@ -65,7 +65,7 @@ docker run -p 3000:3000 car-portal
 
 ```bash
 # Build and run with Docker Compose
-docker-compose up -d encar_portal
+docker-compose up -d car_portal
 ```
 
 The portal will be available at port 3000 (or 9102 when using docker-compose).

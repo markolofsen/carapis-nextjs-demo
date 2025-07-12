@@ -1,9 +1,9 @@
+import type { VehicleListItem } from '@/api/types';
 import routes from '@/core/routes';
 import { NumberFormatter } from '@carapis/nextjs/utils';
 import { Box, Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
-import type { VehicleListItem } from '../types';
 
 interface VehicleCardProps {
   vehicle: VehicleListItem;

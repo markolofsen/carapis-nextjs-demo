@@ -2,10 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import { VehicleHeader, VehicleInfo, VehiclePhoto } from './components';
 import { DetailProvider } from './context';
-import type { VehicleDetail } from './types';
+import type { VehicleWebDetail } from './types';
 
 interface VehicleDetailProps {
-  vehicle: VehicleDetail | null;
+  vehicle: VehicleWebDetail | null;
 }
 
 const VehicleDetailContent: React.FC = () => {

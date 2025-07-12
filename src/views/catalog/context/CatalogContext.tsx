@@ -1,7 +1,7 @@
 import { dataEncarApiVehiclesList } from '@/api';
+import type { CatalogFilter, VehicleListItem } from '@/api/types';
 import { useRouter } from 'next/router';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import type { CatalogFilter, VehicleListItem } from '../types';
 
 interface CatalogContextType {
   vehicles: VehicleListItem[];

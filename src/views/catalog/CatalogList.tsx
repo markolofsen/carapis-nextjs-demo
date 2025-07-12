@@ -1,3 +1,4 @@
+import type { VehicleListItem } from '@/api/types';
 import { Pagination } from '@carapis/nextjs/components';
 import { useMedia } from '@carapis/nextjs/hooks';
 import { Box, CircularProgress, Typography } from '@mui/material';
@@ -6,7 +7,6 @@ import CatalogFiltersWrapper from './components/CatalogFiltersWrapper';
 import NoResultsFound from './components/NoResultsFound';
 import VehicleCard from './components/VehicleCard';
 import { CatalogProvider, FiltersProvider, useCatalog } from './context';
-import type { VehicleListItem } from './types';
 
 interface CatalogListProps {
   initialVehicles: VehicleListItem[];
