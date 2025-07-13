@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@carapis/api": "latest",
-    "@carapis/nextjs": "latest",
+    "@carapis/nextjs": "^1.0.4",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",

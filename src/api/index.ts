@@ -9,28 +9,20 @@ import { API } from '@carapis/api';
 
 export type VehicleListQuery = Encar_publicTypes.DataEncarApiVehiclesWebListData['query'];
 
-// SSR proxy url - use direct API URL for SSR, /apix proxy for client
-const apiUrl = typeof window === 'undefined' ? settings.apiUrl : '/';
-
 // Initialize API client with base URL only
-const api = new API(apiUrl);
-const headers = {
-  'X-API-Key': settings.apiKey,
-  'Content-Type': 'application/json',
-};
+const api = new API(settings.url);
+const apiClient = api.encar_public;
 
 // Wrapper for vehicle list
 export const dataEncarApiVehiclesList = (query: VehicleListQuery) =>
-  api.encar_public?.dataEncarApiVehiclesWebList({
+  apiClient?.dataEncarApiVehiclesWebList({
     query,
-    headers,
   });
 
 // Wrapper for vehicle detail
 export const dataEncarApiVehiclesRetrieve = (listing_id: string) =>
-  api.encar_public?.dataEncarApiVehiclesWebRetrieve({
+  apiClient?.dataEncarApiVehiclesWebRetrieve({
     path: { listing_id },
-    headers,
   });
 
 export default api;

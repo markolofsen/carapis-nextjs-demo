@@ -16,25 +16,18 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    CARAPIS_APIKEY: process.env.CARAPIS_APIKEY,
   },
 
   // Use SWC for optimization
   swcMinify: true,
 
+  trailingSlash: true,
+
   // Webpack configuration for workspace packages
   webpack: (config, { isServer }) => {
     // No custom webpack config needed - transpilePackages handles everything
     return config;
-  },
-
-  // Proxy API requests to backend
-  async rewrites() {
-    return [
-      {
-        source: '/apix/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/apix/:path*/`,
-      },
-    ];
   },
 
   // Headers for CORS and security

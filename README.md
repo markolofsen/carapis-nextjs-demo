@@ -1,82 +1,86 @@
-# Car Demo Portal
+# Ready-to-Use Car Portal
 
 ## Overview
 
-A pre-configured demo portal for car listings and management, built on top of the CarAPIS platform. This is a lightweight Next.js application designed for easy deployment and demonstration purposes.
+Launch your car portal in 10 minutes with our Docker container. Pre-configured with CarAPIS integration, responsive design, and thousands of vehicles from ENCAR. No developers needed.
 
 ## Features
 
-- **Car Listings**: Browse and search vehicles
-- **Car Details**: View detailed information about each vehicle
-- **Responsive Design**: Works on desktop and mobile devices
-- **Pre-configured**: Ready to run with CarAPIS integration
-- **Lightweight**: Minimal dependencies for fast loading
+- **Professional Design**: Modern, responsive design that works on all devices
+- **Thousands of Cars**: Access to thousands of vehicles from ENCAR with real-time data
+- **Advanced Search**: Powerful filtering by brand, model, year, price, fuel type
+- **SEO Optimized**: Built for search engines to help customers find your portal
+- **Fast Loading**: Optimized for speed with server-side rendering
+- **Secure & Reliable**: API keys protected on server, SSL encryption
 
 ## Quick Start
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm (recommended) or npm
+- Server with Docker
+- 2GB RAM
+- 10GB storage
+- CarAPIS API key
 
-### Installation
+### Launch in 10 Minutes
 
 ```bash
-# Install dependencies
-pnpm install
+# 1. Download Docker image
+docker pull carapis/portal:latest
 
-# Start development server
-pnpm dev
+# 2. Run with your settings
+docker run -d \
+  -p 3000:3000 \
+  -e CARAPIS_APIKEY=your-key \
+  -e NEXT_PUBLIC_URL=https://your-domain.com \
+  carapis/portal:latest
+
+# 3. Done! Website runs on port 3000
 ```
 
-The application will be available at `http://localhost:3000`
+Your car portal will be available at `http://localhost:3000`
 
 ### Environment Variables
 
-The portal is pre-configured with the following environment variables:
+Required environment variables:
 
 ```env
-NEXT_PUBLIC_URL=https://vamcar.com
-NEXT_PUBLIC_API_URL=https://api2.carapis.com
-
-# CARAPIS
-NEXT_PUBLIC_CARAPIS_APIKEY=
-NEXT_PUBLIC_GOOGLE_TAG_ID=
+CARAPIS_APIKEY=your-api-key-here
+NEXT_PUBLIC_URL=https://your-domain.com
 ```
 
-- `NEXT_PUBLIC_CARAPIS_APIKEY` — your CarAPIS API key (get it from your CarAPIS dashboard)
-- `NEXT_PUBLIC_GOOGLE_TAG_ID` — your Google Tag Manager ID (optional, for analytics)
+Optional:
 
-## Docker Deployment
+```env
+NEXT_PUBLIC_GOOGLE_TAG_ID=your-gtag-id
+```
 
-For production deployment, use the provided Docker configuration:
+**Security**: API keys are kept server-side and never exposed to the client browser. All API requests are proxied through secure middleware.
 
-### Using Dockerfile
+## Advanced Deployment
+
+### Custom Docker Build
 
 ```bash
-# Build the Docker image
+# Build image
 docker build -t car-portal .
 
-# Run the container
+# Run container
 docker run -p 3000:3000 car-portal
 ```
 
-### Using Docker Compose
+### Docker Compose
 
 ```bash
-# Build and run with Docker Compose
+# Build and run
 docker-compose up -d car_portal
 ```
 
-The portal will be available at port 3000 (or 9102 when using docker-compose).
-
 ### Environment Variables in Docker
-
-You can pass environment variables when running the container:
 
 ```bash
 docker run -p 3000:3000 \
-  -e NEXT_PUBLIC_CARAPIS_APIKEY=your-api-key \
+  -e CARAPIS_APIKEY=your-api-key \
   -e NEXT_PUBLIC_GOOGLE_TAG_ID=your-gtag-id \
   car-portal
 ```
@@ -87,8 +91,11 @@ docker run -p 3000:3000 \
 portal/
 ├── src/
 │   ├── api/                 # API clients and types
-│   │   ├── encar_public/    # ENCAR API client
-│   │   └── index.ts         # API exports
+│   │   └── index.ts         # API exports (secure proxy)
+│   ├── pages/
+│   │   ├── api/             # API routes
+│   │   ├── catalog/         # Car catalog pages
+│   │   └── v/               # Vehicle detail pages
 │   ├── components/          # UI components
 │   ├── core/                # Core configuration
 │   │   ├── routes.ts        # Route definitions
@@ -97,11 +104,6 @@ portal/
 │   │   ├── 404/             # 404 page layout
 │   │   ├── Error/           # Error page layout
 │   │   └── Public/          # Public pages layout
-│   ├── pages/               # Next.js pages
-│   │   ├── api/             # API routes
-│   │   ├── catalog/         # Car catalog pages
-│   │   ├── v/               # Vehicle detail pages
-│   │   └── index.tsx        # Home page
 │   └── views/               # Page views and components
 │       ├── catalog/         # Catalog view components
 │       └── detail/          # Vehicle detail view
@@ -111,21 +113,40 @@ portal/
 │   │   ├── fonts/           # Font files
 │   │   └── lottie/          # Lottie animation files
 │   └── manifest.json        # PWA manifest
+├── middleware.ts            # Edge proxy for API and media
 ├── package.json             # Dependencies and scripts
 ├── tsconfig.json            # TypeScript configuration
 ├── next.config.mjs          # Next.js configuration
 └── README.md                # This file
 ```
 
-## API Integration
+## What You Get
 
-This portal integrates with the CarAPIS platform for:
+- **Professional Design**: Modern, responsive design that works on all devices
+- **Thousands of Cars**: Access to thousands of vehicles from ENCAR with real-time data
+- **Advanced Search**: Powerful filtering by brand, model, year, price, fuel type
+- **SEO Optimized**: Built for search engines to help customers find your portal
+- **Fast Loading**: Optimized for speed with server-side rendering
+- **Secure & Reliable**: API keys protected on server, SSL encryption
+- **Edge Proxy**: Fast middleware-based API and media proxying
 
-- Vehicle data retrieval
-- Search and filtering
-- Real-time updates
+## Why Choose Our Portal?
+
+- **Save Time**: Launch in 10 minutes instead of months of development
+- **Save Money**: No need to hire developers or pay for custom development
+- **No Technical Knowledge**: Just run Docker command and you're ready to go
+- **Professional Quality**: Built by experts with best practices
+- **Always Updated**: Get new features and improvements automatically
+- **Instant Support**: Professional support when you need help
 
 ## Development
+
+For developers who want to modify the portal:
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
 
 ### Available Scripts
 
@@ -133,6 +154,15 @@ This portal integrates with the CarAPIS platform for:
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
+
+### Architecture
+
+The portal uses a clean, minimalistic architecture:
+
+- **Middleware Proxy**: Edge-level proxying for `/apix/*` and `/media/*` requests
+- **API Client**: Simple wrapper around CarAPIS with automatic authentication
+- **Server-Side Rendering**: Fast initial page loads with SEO optimization
+- **Client-Side Hydration**: Smooth user experience with React hooks
 
 ## License
 
