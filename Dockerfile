@@ -18,8 +18,11 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Configure DNS servers for external API access
 ENV DNS_SERVERS="8.8.8.8 8.8.4.4"
 
+# Disable prepare scripts to avoid husky issues
+ENV npm_config_ignore_scripts=true
+
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install --production --ignore-scripts --legacy-peer-deps
 
 COPY . .
 RUN npm run build
