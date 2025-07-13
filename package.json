@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@carapis/api": "latest",
-    "@carapis/nextjs": "^1.0.4",
+    "@carapis/nextjs": "latest",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
@@ -83,5 +83,10 @@
     "jsdom": "^26.1.0",
     "typescript": "5.8.2",
     "vitest": "^2.1.8"
+  },
+  "overrides": {
+    "@carapis/nextjs": {
+      "@carapis/api": "latest"
+    }
   }
 }
