@@ -21,6 +21,9 @@ export default async function handler(req: Request) {
       const decodedData = JSON.parse(Buffer.from(dataParam, 'base64').toString('utf-8'));
       title = decodedData.title || title;
       subtitle = decodedData.subtitle || subtitle;
+
+      console.debug('decodedData');
+      console.debug(JSON.stringify(decodedData, null, 2));
     } catch (error) {
       console.error('Error decoding base64 data:', error);
     }

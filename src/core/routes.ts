@@ -30,28 +30,28 @@ class Routes extends BaseRouteManager {
 
   // Catalog routes
   catalog = {
-    index: this.route('/catalog', {
+    index: this.route('/catalog/', {
       label: 'Catalog',
       description: 'Vehicle catalog',
       requiresAuth: false,
       icon: 'inventory',
     }),
 
-    brand: this.routeWithParams('/catalog/[brand]', ['brand'], {
+    brand: this.routeWithParams('/catalog/[brand]/', ['brand'], {
       label: 'Brand Catalog',
       description: 'Browse vehicles by brand',
       requiresAuth: false,
       icon: 'branding_watermark',
     }),
 
-    model: this.routeWithParams('/catalog/[brand]/[model]', ['brand', 'model'], {
+    model: this.routeWithParams('/catalog/[brand]/[model]/', ['brand', 'model'], {
       label: 'Model Catalog',
       description: 'Browse vehicles by model',
       requiresAuth: false,
       icon: 'model_training',
     }),
 
-    vehicle: this.routeWithParams('/catalog/[brand]/[model]/[vehicle_id]', ['brand', 'model', 'vehicle_id'], {
+    vehicle: this.routeWithParams('/catalog/[brand]/[model]/[vehicle_id]/', ['brand', 'model', 'vehicle_id'], {
       label: 'Vehicle Details',
       description: 'Vehicle details page',
       requiresAuth: false,
@@ -61,7 +61,7 @@ class Routes extends BaseRouteManager {
 
   // Dashboard routes
   dashboard = {
-    index: this.route('/dashboard', {
+    index: this.route('/dashboard/', {
       label: 'Dashboard',
       description: 'Dashboard page',
       requiresAuth: true,
@@ -71,7 +71,7 @@ class Routes extends BaseRouteManager {
 
   // Auth routes
   auth = {
-    default: this.route('/auth', {
+    default: this.route('/auth/', {
       label: 'Auth',
       description: 'Auth page',
       requiresAuth: false,
@@ -86,10 +86,10 @@ class AppMenu extends BaseMenuManager {
   }
 
   // Dashboard menu items
-  dashboard = this.menuItem('Dashboard', '/dashboard', 'dashboard');
+  dashboard = this.menuItem('Dashboard', '/dashboard/', 'dashboard');
 
   // Catalog menu item
-  catalog = this.menuItem('Catalog', '/catalog', 'inventory');
+  catalog = this.menuItem('Catalog', '/catalog/', 'inventory');
 
   // Implementation of abstract buildMenu method
   buildMenu(userRoles: string[] = []): MenuItem[] {

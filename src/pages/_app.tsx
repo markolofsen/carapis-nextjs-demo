@@ -9,6 +9,7 @@ import { ConfirmProvider } from '@carapis/nextjs/components';
 import { AuthProvider } from '@carapis/nextjs/context';
 import { createEmotionCache, ThemeProvider } from '@carapis/nextjs/theme';
 
+import { useGoogleAnalytics } from '@/components/nextjs/GoogleAnalytics';
 import { settings } from '@/core/settings';
 import { determinePageConfig, PageWithConfig } from '@carapis/nextjs/utils';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -31,6 +32,8 @@ export default function MyApp(props: AppPropsWithConfig) {
   // Use the helper function to get the final config
   const pageConfig = determinePageConfig(Component, pageProps, settings.app.title, settings.app.description);
 
+  useGoogleAnalytics();
+
   return (
     <AppCacheProvider {...props} emotionCache={emotionCache}>
       <ThemeProvider>
@@ -42,8 +45,8 @@ export default function MyApp(props: AppPropsWithConfig) {
                 apiUrl: settings.apiUrl,
                 routes: {
                   auth: Routes.auth.default.path,
-                  defaultCallback: Routes.home.path,
-                  defaultAuthCallback: Routes.auth.default.path,
+                  defaultCallback: Routes.defaultCallbackUrl.path,
+                  defaultAuthCallback: Routes.defaultAuthCallbackUrl.path,
                 },
               }}
             >

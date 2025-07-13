@@ -8,8 +8,8 @@ export const settings = {
   app: {
     icon: '/favicon.png',
     name: 'VamCar',
-    title: 'VamCar',
-    description: 'VamCar',
+    title: 'VamCar - Best car search engine',
+    description: 'Best car search engine',
     email: 'hello@reforms.ai',
     version: '0.0.1',
   },
