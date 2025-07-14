@@ -1,14 +1,16 @@
-import { Box } from '@mui/material';
 import React from 'react';
 import { VehicleHeader, VehicleInfo, VehiclePhoto } from './components';
-import { DetailProvider } from './context';
+import { DetailProvider, useDetail } from './context';
 import type { VehicleWebDetail } from './types';
+import { VehicleCalculator } from '@carapis/portal/components/calculator';
+import { Box } from '@mui/material';
 
 interface VehicleDetailProps {
   vehicle: VehicleWebDetail | null;
 }
 
 const VehicleDetailContent: React.FC = () => {
+  const { vehicle } = useDetail();
   return (
     <Box>
       <VehicleHeader />
@@ -21,6 +23,10 @@ const VehicleDetailContent: React.FC = () => {
         <Box sx={{ flex: 1 }}>
           <VehicleInfo />
         </Box>
+      </Box>
+
+      <Box sx={{ mt: 4 }}>
+        <VehicleCalculator />
       </Box>
     </Box>
   );

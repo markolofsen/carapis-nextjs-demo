@@ -4,7 +4,7 @@ const nextConfig = {
   // Disable React Strict Mode to prevent double effects and multiple connections
   reactStrictMode: false,
 
-  transpilePackages: ['@carapis/nextjs'],
+  transpilePackages: ['@carapis/nextjs', '@carapis/portal'],
 
   // SWC compiler configuration for CSS-in-JS
   compiler: {
