@@ -11,7 +11,7 @@ export type VehicleListQuery = Encar_publicTypes.DataEncarApiVehiclesWebListData
 
 // Initialize API client with base URL only
 const api = new API(settings.url);
-const apiClient = api.encar_public;
+const apiClient = api.encarPublic;
 
 // Wrapper for vehicle list
 export const dataEncarApiVehiclesList = (query: VehicleListQuery) =>

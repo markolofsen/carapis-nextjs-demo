@@ -10,6 +10,7 @@ import { AuthProvider } from '@carapis/nextjs/context';
 import { createEmotionCache, ThemeProvider } from '@carapis/nextjs/theme';
 
 import { useGoogleAnalytics } from '@/components/nextjs/GoogleAnalytics';
+import PageProgress from '@/components/nextjs/PageProgress';
 import { settings } from '@/core/settings';
 import { determinePageConfig, PageWithConfig } from '@carapis/nextjs/utils';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -51,6 +52,7 @@ export default function MyApp(props: AppPropsWithConfig) {
               }}
             >
               <ConfirmProvider>
+                <PageProgress />
                 <Component {...pageProps} />
               </ConfirmProvider>
             </AuthProvider>

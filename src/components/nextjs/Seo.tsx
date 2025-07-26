@@ -1,9 +1,9 @@
-import Head from "next/head";
-import React from "react";
+import Head from 'next/head';
+import React from 'react';
 
-import { settings } from "@/core/settings";
+import { settings } from '@/core/settings';
 
-import { PageConfig } from "@carapis/nextjs/utils";
+import { PageConfig } from '@carapis/nextjs/utils';
 
 interface SeoProps {
   pageConfig: PageConfig;
@@ -13,14 +13,14 @@ export const Seo: React.FC<SeoProps> = ({ pageConfig }) => {
   // Dictionary with static files
   const staticFiles = {
     favicons: {
-      androidChrome192: "/static/favicons/android-chrome-192x192.png",
-      androidChrome384: "/static/favicons/android-chrome-384x384.png",
-      icon512: "/static/favicons/icon-512x512.png",
+      androidChrome192: '/static/favicons/android-chrome-192x192.png',
+      androidChrome384: '/static/favicons/android-chrome-384x384.png',
+      icon512: '/static/favicons/icon-512x512.png',
     },
   };
 
-  const title = pageConfig.title || "";
-  const description = pageConfig.description || "";
+  const title = pageConfig.title || '';
+  const description = pageConfig.description || '';
 
   // Base64 encode the JSON data of title and description
   // This completely avoids the need for query parameter delimiters
@@ -28,8 +28,8 @@ export const Seo: React.FC<SeoProps> = ({ pageConfig }) => {
     JSON.stringify({
       title,
       subtitle: description,
-    })
-  ).toString("base64");
+    }),
+  ).toString('base64');
 
   const ogImage = `${settings.url}/api/og/route?data=${dataParam}`;
 
@@ -38,10 +38,9 @@ export const Seo: React.FC<SeoProps> = ({ pageConfig }) => {
       <title>{pageConfig.title}</title>
       <meta name="description" content={pageConfig.description} />
 
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-      />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+      <meta name="format-detection" content="telephone=no" />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
@@ -55,6 +54,16 @@ export const Seo: React.FC<SeoProps> = ({ pageConfig }) => {
       <meta name="twitter:title" content={pageConfig.title} />
       <meta name="twitter:description" content={pageConfig.description} />
       <meta name="twitter:image" content={ogImage} />
+
+      {/* JSON-LD Schema Markup */}
+      {pageConfig.jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(pageConfig.jsonLd),
+          }}
+        />
+      )}
 
       {/* PWA and Android Chrome icons */}
       {/* <link
@@ -93,10 +102,7 @@ export const Seo: React.FC<SeoProps> = ({ pageConfig }) => {
 
       <link rel="manifest" href="/manifest.json" />
 
-      <meta
-        name="msapplication-TileImage"
-        content={staticFiles.favicons.androidChrome192}
-      />
+      <meta name="msapplication-TileImage" content={staticFiles.favicons.androidChrome192} />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="apple-mobile-web-app-title" content={pageConfig.title} />

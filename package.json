@@ -20,7 +20,7 @@
     "commit2": "git add . && git commit -m 'fixes' && git push"
   },
   "dependencies": {
-    "@carapis/api": "latest",
+    "@carapis/api": "1.0.9",
     "@carapis/nextjs": "latest",
     "@carapis/portal": "latest",
     "@emotion/cache": "^11.14.0",
