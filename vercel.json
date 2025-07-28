@@ -1,6 +1,5 @@
 {
-    "buildCommand": "pnpm turbo run build --filter=@repo/api --filter=web...",
-    "installCommand": "pnpm install",
-    "outputDirectory": "apps/web/.next",
-    "framework": "nextjs"
+  "buildCommand": "pnpm build",
+  "installCommand": "npm install -g pnpm@8.15.0 && pnpm install",
+  "framework": "nextjs"
 }
