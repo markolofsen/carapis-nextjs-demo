@@ -1,136 +1,169 @@
-# Turborepo starter
+# Ready-to-Use Car Portal
 
-This Turborepo starter is maintained by the Turborepo core team.
+## Overview
 
-## Using this example
+Launch your car portal in 10 minutes with our Docker container. Pre-configured with CarAPIS integration, responsive design, and thousands of vehicles from ENCAR. No developers needed.
 
-Run the following command:
+## Features
 
-```sh
-npx create-turbo@latest
+- **Professional Design**: Modern, responsive design that works on all devices
+- **Thousands of Cars**: Access to thousands of vehicles from ENCAR with real-time data
+- **Advanced Search**: Powerful filtering by brand, model, year, price, fuel type
+- **SEO Optimized**: Built for search engines to help customers find your portal
+- **Fast Loading**: Optimized for speed with server-side rendering
+- **Secure & Reliable**: API keys protected on server, SSL encryption
+
+## Quick Start
+
+### Prerequisites
+
+- Server with Docker
+- 2GB RAM
+- 10GB storage
+- CarAPIS API key
+
+### Launch in 10 Minutes
+
+```bash
+# 1. Download Docker image
+docker pull carapis/portal:latest
+
+# 2. Run with your settings
+docker run -d \
+  -p 3000:3000 \
+  -e CARAPIS_APIKEY=your-key \
+  -e NEXT_PUBLIC_URL=https://your-domain.com \
+  carapis/portal:latest
+
+# 3. Done! Website runs on port 3000
 ```
 
+Your car portal will be available at `http://localhost:3000`
 
-## What's inside?
+### Environment Variables
 
-This Turborepo includes the following packages/apps:
+Required environment variables:
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```env
+CARAPIS_APIKEY=your-api-key-here
+NEXT_PUBLIC_URL=https://your-domain.com
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+Optional:
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+```env
+NEXT_PUBLIC_GOOGLE_TAG_ID=your-gtag-id
 ```
 
-### Develop
+**Security**: API keys are kept server-side and never exposed to the client browser. All API requests are proxied through secure middleware.
 
-To develop all apps and packages, run the following command:
+## Advanced Deployment
 
-```
-cd my-turborepo
+### Custom Docker Build
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+```bash
+# Build image
+docker build -t car-portal .
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+# Run container
+docker run -p 3000:3000 car-portal
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Docker Compose
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```bash
+# Build and run
+docker-compose up -d car_portal
 ```
 
-### Remote Caching
+### Environment Variables in Docker
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+```bash
+docker run -p 3000:3000 \
+  -e CARAPIS_APIKEY=your-api-key \
+  -e NEXT_PUBLIC_GOOGLE_TAG_ID=your-gtag-id \
+  car-portal
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Project Structure
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+portal/
+├── src/
+│   ├── api/                 # API clients and types
+│   │   └── index.ts         # API exports (secure proxy)
+│   ├── pages/
+│   │   ├── api/             # API routes
+│   │   ├── catalog/         # Car catalog pages
+│   │   └── v/               # Vehicle detail pages
+│   ├── components/          # UI components
+│   ├── core/                # Core configuration
+│   │   ├── routes.ts        # Route definitions
+│   │   └── settings.ts      # App settings
+│   ├── layouts/             # Page layouts
+│   │   ├── 404/             # 404 page layout
+│   │   ├── Error/           # Error page layout
+│   │   └── Public/          # Public pages layout
+│   └── views/               # Page views and components
+│       ├── catalog/         # Catalog view components
+│       └── detail/          # Vehicle detail view
+├── public/                  # Static assets
+│   ├── static/              # Static files
+│   │   ├── favicons/        # Favicon files
+│   │   ├── fonts/           # Font files
+│   │   └── lottie/          # Lottie animation files
+│   └── manifest.json        # PWA manifest
+├── middleware.ts            # Edge proxy for API and media
+├── package.json             # Dependencies and scripts
+├── tsconfig.json            # TypeScript configuration
+├── next.config.mjs          # Next.js configuration
+└── README.md                # This file
 ```
 
-## Useful Links
+## What You Get
 
-Learn more about the power of Turborepo:
+- **Professional Design**: Modern, responsive design that works on all devices
+- **Thousands of Cars**: Access to thousands of vehicles from ENCAR with real-time data
+- **Advanced Search**: Powerful filtering by brand, model, year, price, fuel type
+- **SEO Optimized**: Built for search engines to help customers find your portal
+- **Fast Loading**: Optimized for speed with server-side rendering
+- **Secure & Reliable**: API keys protected on server, SSL encryption
+- **Edge Proxy**: Fast middleware-based API and media proxying
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+## Why Choose Our Portal?
+
+- **Save Time**: Launch in 10 minutes instead of months of development
+- **Save Money**: No need to hire developers or pay for custom development
+- **No Technical Knowledge**: Just run Docker command and you're ready to go
+- **Professional Quality**: Built by experts with best practices
+- **Always Updated**: Get new features and improvements automatically
+- **Instant Support**: Professional support when you need help
+
+## Development
+
+For developers who want to modify the portal:
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
+
+### Available Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+
+### Architecture
+
+The portal uses a clean, minimalistic architecture:
+
+- **Middleware Proxy**: Edge-level proxying for `/apix/*` and `/media/*` requests
+- **API Client**: Simple wrapper around CarAPIS with automatic authentication
+- **Server-Side Rendering**: Fast initial page loads with SEO optimization
+- **Client-Side Hydration**: Smooth user experience with React hooks
+
+## License
+
+This demo portal is part of the CarAPIS ecosystem.
