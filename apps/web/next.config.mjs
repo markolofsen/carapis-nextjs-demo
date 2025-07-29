@@ -19,9 +19,6 @@ const nextConfig = {
     CARAPIS_APIKEY: process.env.CARAPIS_APIKEY,
   },
 
-  // Use SWC for optimization
-  swcMinify: true,
-
   trailingSlash: true,
 
   // Webpack configuration for workspace packages
