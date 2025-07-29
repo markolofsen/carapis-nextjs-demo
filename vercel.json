@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm build",
-  "installCommand": "pnpm install --ignore-workspace",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install && cd apps/web && pnpm install --ignore-workspace",
   "framework": "nextjs"
 }
